@@ -1,0 +1,7 @@
+**/deprecated
+**/.env
+**/.vscode
+**/venv
+**/__pycache__
+**/temp
+**/database
