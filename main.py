@@ -16,7 +16,7 @@ logger = logging.basicConfig(
     filename=LOG_FILE_NAME if not DEBUG else None, 
     format=format,
     encoding='utf-8', 
-    level=logging.DEBUG, 
+    level=logging.INFO, 
 )
 if not DEBUG:
     logging.getLogger(logger).addHandler(logging.StreamHandler())
@@ -37,6 +37,14 @@ def startCommand(update: Update, context: CallbackContext):
 def helpCommand(update: Update, context: CallbackContext):
     
     context.bot.send_message(chat_id=update.effective_chat.id, text="Help command\n placeholder", )
+
+def textDMCommand(update: Update, context: CallbackContext):
+    print(update)
+    context.bot.send_message(chat_id=update.message.from_user.id, text="Here is my message in users", )
+
+def getinfoCommand(update: Update, context: CallbackContext):
+    print(update)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=f'{update.message}', )
 
 def messageHandler(update: Update, context: CallbackContext):
     # white list of users
@@ -61,8 +69,6 @@ def queryHandler(update: Update, context: CallbackContext):
     query = update.callback_query.data
     update.callback_query.answer()
 
-    global likes, dislikes
-
     if "callback1" in query:
         logging.info('callback1')
         context.bot.send_message(chat_id=update.effective_chat.id, text='callback1 message')
@@ -72,9 +78,12 @@ def queryHandler(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=update.effective_chat.id, text='callback2 message')
 
 
+
 # commands
 dispatcher.add_handler(CommandHandler("start", startCommand))
 dispatcher.add_handler(CommandHandler("help", helpCommand))
+dispatcher.add_handler(CommandHandler("text_dm", textDMCommand))
+dispatcher.add_handler(CommandHandler("get_info", getinfoCommand))
 
 
 dispatcher.add_handler(MessageHandler(Filters.text, messageHandler))
