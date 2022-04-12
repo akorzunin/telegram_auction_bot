@@ -4,4 +4,6 @@
 **/venv
 **/__pycache__
 **/temp
-**/database
+**/data_base
+**/fake_data_seed
+**/fast_api_test
