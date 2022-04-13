@@ -4,12 +4,12 @@ from typing import Optional, Union
 
 from sqlalchemy.orm.attributes import InstrumentedAttribute
 from sqlalchemy.sql.elements import BinaryExpression
-from pydantic import BaseModel, Required
+from pydantic import BaseModel
 # import models
-try:
-    import models
-except ModuleNotFoundError:
-    import db_api.models as models # TODO fix it
+# try:
+#     import models
+# except ModuleNotFoundError:
+#    import db_api.models as models # TODO fix it
 
 class AuctionItemBase(BaseModel):
     title: str

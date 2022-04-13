@@ -1,34 +1,25 @@
 from telegram import InlineKeyboardMarkup, Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InputMediaPhoto
 from telegram.ext import CallbackContext
 import logging
+import json
 import requests
+from modules.bot_callbacks import get_price_callback, attend_callback, price_increment_callback
+
 
 randomPImageUrl = "https://picsum.photos/1200"
+DEBUG_CHAT_ID = 503131177
 
-
-def messageHandler(update: Update, context: CallbackContext):
-    # white list of users
-    # if update.effective_chat.username not in allowedUsernames:
-    #     context.bot.send_message(chat_id=update.effective_chat.id, text="You are not allowed to use this bot")
-    #     return
-    logging.info('[HANDLER CALL]')
-    if 'button_two_text' in update.message.text:
-        image = requests.get(randomPImageUrl).content
-    if 'button_one_text' in update.message.text:
-        image = requests.get(randomPImageUrl).content
-
-    if image:
-
-        buttons = [
-            [InlineKeyboardButton("callback1_text", callback_data="callback1")], 
-            [InlineKeyboardButton("callback2_text", callback_data="callback2")]
-        ]
-        context.bot.sendMediaGroup(chat_id=update.effective_chat.id, media=[InputMediaPhoto(image, caption="caption")])
-        context.bot.send_message(chat_id=update.effective_chat.id, reply_markup=InlineKeyboardMarkup(buttons), text="response placeholder")
+def user_white_list():
+#     # white list of users
+#     # if update.effective_chat.username not in allowedUsernames:
+#     #     context.bot.send_message(chat_id=update.effective_chat.id, text="You are not allowed to use this bot")
+    pass
 
 def queryHandler(update: Update, context: CallbackContext):
     query = update.callback_query.data
     update.callback_query.answer()
+
+    # OLD CALLBACKS TODO remove later
 
     if "callback1" in query:
         logging.info('callback1')
@@ -42,3 +33,43 @@ def queryHandler(update: Update, context: CallbackContext):
     if "new_msg" in query:
         logging.info('new_msg')
         context.bot.send_message(chat_id=update.effective_chat.id, text='new_msg message')
+    
+    # NEW CALLBACKS
+
+    if "get_price_callback" in query:
+        item_id = int(query[query.find('id=')+len('id='):])
+        if __debug__: # TODO read debug from .env
+            logging.info('get_price_callback')
+            # context.bot.send_message(
+            #     chat_id=DEBUG_CHAT_ID, 
+            #     text=f'get_price_callback for item_id: {item_id}' 
+            # )
+        get_price_callback(
+            update=update,
+            context=context,
+            item_id=item_id,
+        )
+    if "attend_callback" in query:
+        item_id = int(query[query.find('id=')+len('id='):])
+        if __debug__: # TODO read debug from .env
+            logging.info('attend_callback')
+            # context.bot.send_message(
+            #     chat_id=DEBUG_CHAT_ID, 
+            #     text=f'attend_callback for item_id: {item_id}'
+            # )
+        attend_callback(
+            update=update,
+            context=context,
+            item_id=item_id,
+        )
+
+    if "price_increment" in query:
+        # parse out item_id and value into dict
+        json_dict = ''.join(query.split(' ')[1:])
+        callback_data = json.loads(json_dict)
+        price_increment_callback(
+            update=update,
+            context=context,
+            item_id=callback_data['id'],
+            price_increment=callback_data['val'],
+        )
