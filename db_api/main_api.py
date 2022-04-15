@@ -140,4 +140,7 @@ def delete_user_by_username(username: int, db: Session = Depends(get_db))-> bool
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, debug=1, host="0.0.0.0", port=8000)
+    import os
+    PORT=os.getenv('PORT', 8001)
+    
+    uvicorn.run(app, debug=1, host="0.0.0.0", port=PORT)
