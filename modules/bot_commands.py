@@ -21,6 +21,20 @@ def helpCommand(update: Update, context: CallbackContext):
     
     context.bot.send_message(chat_id=update.effective_chat.id, text="Help command\n placeholder", )
 
+def get_docs(update: Update, context: CallbackContext):
+    host_ip = requests.get('https://api.ipify.org').content.decode('utf8')
+    text = f'''
+    Current host location: {host_ip}
+    
+    Link to docs page:
+    http://{host_ip}:8001/docs
+    '''
+
+    context.bot.send_message(
+        chat_id=update.effective_chat.id, 
+        text=text, 
+    )
+
 def get_image_Command(update: Update, context: CallbackContext):
 
     context.bot.send_media_group(

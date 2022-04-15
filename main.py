@@ -46,6 +46,7 @@ dispatcher = updater.dispatcher
 dispatcher.add_handler(CommandHandler("start", bot_commands.startCommand))
 dispatcher.add_handler(CommandHandler("help", bot_commands.helpCommand))
 dispatcher.add_handler(CommandHandler("get_image", bot_commands.get_image_Command))
+dispatcher.add_handler(CommandHandler("docs", bot_commands.get_docs))
 
 # new commands
 dispatcher.add_handler(CommandHandler("post_from_id", bot_commands.post_from_id))
