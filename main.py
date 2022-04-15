@@ -45,9 +45,6 @@ dispatcher = updater.dispatcher
 # old commands
 dispatcher.add_handler(CommandHandler("start", bot_commands.startCommand))
 dispatcher.add_handler(CommandHandler("help", bot_commands.helpCommand))
-dispatcher.add_handler(CommandHandler("text_dm", bot_commands.textDMCommand))
-dispatcher.add_handler(CommandHandler("get_info", bot_commands.getinfoCommand))
-dispatcher.add_handler(CommandHandler("new_msg", bot_commands.newmsgCommand))
 dispatcher.add_handler(CommandHandler("get_image", bot_commands.get_image_Command))
 
 # new commands

@@ -4,8 +4,14 @@ import uvicorn
 
 import crud, models, schemas
 from database import SessionLocal, engine
+try:
+    models.Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(e)
+    print('pepe')
+    raise e
+    
 
-models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 

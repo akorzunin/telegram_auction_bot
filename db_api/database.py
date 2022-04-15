@@ -11,7 +11,7 @@ sys.path.insert(1, PWD)
 
 SQLALCHEMY_DATABASE_URL = f"sqlite:///{PWD}/data_base/sql_app.db"
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
-
+print(SQLALCHEMY_DATABASE_URL)
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )

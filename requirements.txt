@@ -1,4 +1,7 @@
-telegram==0.0.1
-requests==2.26.0
-python-dotenv==0.19.2
 python-telegram-bot
+cachetools==4.2.2
+requests==2.26.0
+SQLAlchemy==1.4.28
+pydantic==1.8.2
+python-dotenv==0.20.0
+python_dateutil==2.8.2
