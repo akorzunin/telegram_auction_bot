@@ -13,4 +13,8 @@ Telegram bot that provides auction features via telegram interface
 1. `cd` to project folder
 1. create `.env` file
 1. dowload or restore databse as `./data_base/sql_app.db`
-1. `docker-compose  up -d --build`
+1. `sudo ocker-compose  up -d --build`
+
+### Stop Docker
+
+`sudo docker-compose  down`
