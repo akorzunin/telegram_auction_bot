@@ -32,7 +32,7 @@ def main():
         json_data = schemas.AuctionUserCreate(
             username=user,
         )
-        r = requests.post(f'http://{ENDPOINT}:8000/auc_ext/create_user/', json=json_data.dict())
+        r = requests.post(f'http://{ENDPOINT}:8001/auc_ext/create_user/', json=json_data.dict())
         # display(user, r.status_code)
         
     for i in item_list:
@@ -50,7 +50,7 @@ def main():
             photo=f'{item["image"]}|{item["image"]}',
             owner_id=0,
         )
-        r = requests.post(f'http://{ENDPOINT}:8000/auc_ext/create_item/', data=json.dumps(json_data.dict(), default=str))
+        r = requests.post(f'http://{ENDPOINT}:8001/auc_ext/create_item/', data=json.dumps(json_data.dict(), default=str))
 
     # display(item, r.status_code)
 

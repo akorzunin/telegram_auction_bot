@@ -19,7 +19,7 @@ services:
       # - ./sqlite.db:/path/to/sqlite.db
       - ./data_base/sql_app.db:/app/data_base/sql_app.db
     ports:
-      - 8000:8001
+      - 8001:8001
 
 volumes:
   db:

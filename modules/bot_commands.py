@@ -6,7 +6,10 @@ from modules.post_upload_conversation import send_post_to_channel
 from settings.env import DEBUG_CHAT_ID
 from settings.env import MAIN_CHANNEL_ID
 
+import os
+
 randomPImageUrl = "https://picsum.photos/1200"
+ENDPOINT = os.getenv('ENDPOINT')
 
 def startCommand(update: Update, context: CallbackContext):
     context.bot.send_message(
@@ -58,7 +61,7 @@ def post_from_id(update: Update, context: CallbackContext):
     }
 
     r = requests.get(
-        url='http://192.168.1.125:8000/auc_ext/item_by_id/', 
+        url=f'http://{ENDPOINT}:8001/auc_ext/item_by_id/', 
         headers=headers, 
         params=params,
     )
