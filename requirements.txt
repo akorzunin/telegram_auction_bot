@@ -1,4 +1,4 @@
-python-telegram-bot
+python-telegram-bot==13.12
 cachetools==4.2.2
 requests==2.26.0
 SQLAlchemy==1.4.28
