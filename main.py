@@ -1,8 +1,13 @@
-
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 
 
-from telegram.ext import CallbackQueryHandler, Filters, MessageHandler, CommandHandler, Updater
+from telegram.ext import (
+    CallbackQueryHandler,
+    Filters,
+    MessageHandler,
+    CommandHandler,
+    Updater,
+)
 from telegram.ext import (
     Updater,
     CommandHandler,
@@ -14,23 +19,26 @@ from telegram.ext import (
 
 from modules.err_handler import error_handler
 from modules.bot_handlers import queryHandler
-#load .env variables
+
+# load .env variables
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 # read TOKEN from .env
-TOKEN = os.getenv('TOKEN')
+TOKEN = os.getenv("TOKEN")
 updater = Updater(token=TOKEN)
 
 import logging
-DEBUG = __debug__ 
-LOG_FILE_NAME = 'auction_bot.log'
-format = '%(asctime)s [%(levelname)s]: %(message)s'
+
+DEBUG = __debug__
+LOG_FILE_NAME = "auction_bot.log"
+format = "%(asctime)s [%(levelname)s]: %(message)s"
 logger = logging.basicConfig(
-    filename=LOG_FILE_NAME if not DEBUG else None, 
+    filename=LOG_FILE_NAME if not DEBUG else None,
     format=format,
-    encoding='utf-8', 
-    level=logging.INFO, 
+    encoding="utf-8",
+    level=logging.INFO,
 )
 if not DEBUG:
     logging.getLogger(logger).addHandler(logging.StreamHandler())

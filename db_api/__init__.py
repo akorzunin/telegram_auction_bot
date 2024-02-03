@@ -1,10 +1,11 @@
-#load .env variables
+# load .env variables
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
-PWD = os.getenv('PWD')
+PWD = os.getenv("PWD")
 print(PWD)
 
 import sys
-sys.path.insert(1, PWD)
 
+sys.path.insert(1, PWD)
