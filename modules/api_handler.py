@@ -1,8 +1,9 @@
 """Set of functions that help to use fast api w/ db"""
 
 # %%
-import requests
 import json
+
+import requests
 
 from db_api import schemas
 

@@ -1,18 +1,14 @@
+import requests
 from telegram import (
-    InlineKeyboardMarkup,
-    Update,
-    ReplyKeyboardMarkup,
-    KeyboardButton,
-    InlineKeyboardButton,
     InputMediaPhoto,
+    Update,
 )
 from telegram.ext import CallbackContext
-import requests
+
 from modules.post_upload_conversation import send_post_to_channel
-from settings.env import MAIN_CHANNEL_ID, PORT, API_ENDPOINT
+from settings.env import API_ENDPOINT, MAIN_CHANNEL_ID, PORT
 
 randomPImageUrl = "https://picsum.photos/1200"
-
 
 
 def startCommand(update: Update, context: CallbackContext):

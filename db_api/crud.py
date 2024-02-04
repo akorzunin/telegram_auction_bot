@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Session
 
 try:
-    import models, schemas
+    import models
+    import schemas
 except ModuleNotFoundError:
     import db_api.schemas as schemas  # TODO fix it
 
@@ -51,7 +52,7 @@ def update_item_by_id(
         is_sold=models.AuctionItem.is_sold,
         end_date=models.AuctionItem.end_date,
     )
-    db_item = (
+    _ = (
         db.query(models.AuctionItem)
         .filter_by(id=item_id)
         .update(
@@ -62,7 +63,7 @@ def update_item_by_id(
                     defalut_dict,
                     **upd_dict
                 )
-            ).dict()
+            ).model_dump()
         )
     )
     db.commit()
@@ -149,9 +150,7 @@ def auc_user_read_all(db: Session, skip: int = 0, limit: int = 100):
 
 # update user by id
 def auc_user_update(db: Session, id: int, username: str):
-    db_item = (
-        db.query(models.AuctionUser).filter_by(id=id).update(dict(username=username))
-    )
+    _ = db.query(models.AuctionUser).filter_by(id=id).update(dict(username=username))
     db.commit()
     return db.query(models.AuctionUser).get(id)
 

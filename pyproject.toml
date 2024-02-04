@@ -9,6 +9,23 @@ readme = "README.md"
 python = "^3.10"
 
 
+[tool.poetry.group.tg-bot.dependencies]
+python-telegram-bot = "13.12"
+python-dotenv = "^1.0.1"
+requests = "^2.31.0"
+sqlalchemy = "1.4.28"
+python-dateutil = "^2.8.2"
+pydantic = "^2.6.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff.lint]
+select = [
+    # isort
+    "I001",
+]
+
+[tool.isort]
+profile = "black"

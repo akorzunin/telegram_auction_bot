@@ -1,21 +1,16 @@
+import json
+import logging
+
 from telegram import (
-    InlineKeyboardMarkup,
     Update,
-    ReplyKeyboardMarkup,
-    KeyboardButton,
-    InlineKeyboardButton,
-    InputMediaPhoto,
 )
 from telegram.ext import CallbackContext
-import logging
-import json
-import requests
+
 from modules.bot_callbacks import (
-    get_price_callback,
     attend_callback,
+    get_price_callback,
     price_increment_callback,
 )
-
 
 randomPImageUrl = "https://picsum.photos/1200"
 

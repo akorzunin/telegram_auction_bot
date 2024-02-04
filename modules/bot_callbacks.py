@@ -1,18 +1,13 @@
 from telegram import (
+    InlineKeyboardButton,
     InlineKeyboardMarkup,
     Update,
-    ReplyKeyboardMarkup,
-    KeyboardButton,
-    InlineKeyboardButton,
-    InputMediaPhoto,
 )
 from telegram.ext import CallbackContext
-import logging
-import requests
-from modules import api_handler
-from utils.dqdict import Dqdict as dqdict
 
+from modules import api_handler
 from settings.env import API_ENDPOINT as ENDPOINT
+from utils.dqdict import Dqdict as dqdict
 
 
 def get_price_callback(update: Update, context: CallbackContext, item_id: int):
@@ -50,7 +45,7 @@ def attend_callback(update: Update, context: CallbackContext, item_id: int):
     # get user nickname from context
     username = update.effective_user.username
     # get user interface language
-    language_code = update.effective_user.language_code
+    # language_code = update.effective_user.language_code
     # check if that user already exists in DB
     r = api_handler.get_user_by_username(
         username=username,
@@ -66,7 +61,7 @@ def attend_callback(update: Update, context: CallbackContext, item_id: int):
             endpoint=ENDPOINT,
         )
         user_data = r.json()
-        user_id = user_data["id"]
+        # user_id = user_data["id"]
 
     elif user_data is None:
         # create user
@@ -77,7 +72,7 @@ def attend_callback(update: Update, context: CallbackContext, item_id: int):
         if r.status_code < 399:
             # user created
             user_data = r.json()
-            user_id = user_data["id"]
+            # user_id = user_data["id"]
         # TODO handle status_code > 399
 
     item = api_handler.read_item_by_id(

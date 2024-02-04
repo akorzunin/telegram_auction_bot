@@ -1,15 +1,13 @@
 import logging
 from typing import Dict
 
-from telegram import InputMediaPhoto, ReplyKeyboardMarkup, Update, ReplyKeyboardRemove
+from telegram import InputMediaPhoto, ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import (
-    Updater,
-    CommandHandler,
-    MessageHandler,
-    Filters,
-    ConversationHandler,
-    PicklePersistence,
     CallbackContext,
+    CommandHandler,
+    ConversationHandler,
+    Filters,
+    MessageHandler,
 )
 
 CHOOSING, TYPING_REPLY, TYPING_CHOICE, PHOTO_CHOICE = range(4)

@@ -1,15 +1,16 @@
 # %%
-from fake_data_seed import data_link
-from random import randint
-import requests
-from db_api import schemas
 import json
 
 # %%
-from settings.env import API_ENDPOINT as ENDPOINT
+from random import randint, sample
+
+import requests
+from fake_data_seed import data_link
+
+from db_api import schemas
 
 # %%
-from random import sample
+from settings.env import API_ENDPOINT as ENDPOINT
 
 
 def main():
@@ -24,8 +25,8 @@ def main():
         json_data = schemas.AuctionUserCreate(
             username=user,
         )
-        r = requests.post(
-            f"{ENDPOINT}/auc_ext/create_user/", json=json_data.dict()
+        _ = requests.post(
+            f"{ENDPOINT}/auc_ext/create_user/", json=json_data.model_dump()
         )
         # display(user, r.status_code)
 
@@ -44,7 +45,7 @@ def main():
             photo=f'{item["image"]}|{item["image"]}',
             owner_id=0,
         )
-        r = requests.post(
+        _ = requests.post(
             f"{ENDPOINT}/auc_ext/create_item/",
             data=json.dumps(json_data.dict(), default=str),
         )

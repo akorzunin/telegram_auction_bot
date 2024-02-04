@@ -7,3 +7,4 @@
 **/data_base
 **/fake_data_seed
 **/fast_api_test
+poetry.lock

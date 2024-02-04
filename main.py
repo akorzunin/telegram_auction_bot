@@ -1,32 +1,21 @@
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
-
+import logging
 
 from telegram.ext import (
     CallbackQueryHandler,
-    Filters,
-    MessageHandler,
     CommandHandler,
     Updater,
-)
-from telegram.ext import (
-    Updater,
-    CommandHandler,
-    MessageHandler,
-    Filters,
-    ConversationHandler,
-    CallbackContext,
 )
 
+from modules import bot_commands, bot_handlers
+from modules.conversation_handlers import conv_handler
 from modules.err_handler import error_handler
-from modules.bot_handlers import queryHandler
-
-from settings.env import TOKEN, DEBUG
-
-
-import logging
+from modules.post_upload_conversation import post_upload_conversation
+from settings.env import DEBUG, TOKEN
 
 if not TOKEN:
-    raise Exception("Cant find bot token in env variables try to to specify it in .env file")
+    raise Exception(
+        "Cant find bot token in env variables try to to specify it in .env file"
+    )
 updater = Updater(token=TOKEN)
 
 LOG_FILE_NAME = "auction_bot.log"
@@ -40,10 +29,6 @@ logger = logging.basicConfig(
 if not DEBUG:
     logging.getLogger(logger).addHandler(logging.StreamHandler())
 
-from modules import bot_commands
-from modules import bot_handlers
-from modules.conversation_handlers import conv_handler
-from modules.post_upload_conversation import post_upload_conversation
 
 dispatcher = updater.dispatcher
 

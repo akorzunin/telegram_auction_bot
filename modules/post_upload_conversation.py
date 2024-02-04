@@ -5,20 +5,18 @@ from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     InputMediaPhoto,
+    ParseMode,
     ReplyKeyboardMarkup,
-    Update,
     ReplyKeyboardRemove,
+    Update,
 )
-from telegram import ParseMode
 from telegram.error import TimedOut
 from telegram.ext import (
-    Updater,
-    CommandHandler,
-    MessageHandler,
-    Filters,
-    ConversationHandler,
-    PicklePersistence,
     CallbackContext,
+    CommandHandler,
+    ConversationHandler,
+    Filters,
+    MessageHandler,
 )
 
 (
