@@ -18,7 +18,6 @@ from modules.bot_callbacks import (
 
 
 randomPImageUrl = "https://picsum.photos/1200"
-DEBUG_CHAT_ID = 503131177
 
 
 def user_white_list():
@@ -58,12 +57,6 @@ def queryHandler(update: Update, context: CallbackContext):
 
     if "get_price_callback" in query:
         item_id = int(query[query.find("id=") + len("id=") :])
-        if __debug__:  # TODO read debug from .env
-            logging.info("get_price_callback")
-            # context.bot.send_message(
-            #     chat_id=DEBUG_CHAT_ID,
-            #     text=f'get_price_callback for item_id: {item_id}'
-            # )
         get_price_callback(
             update=update,
             context=context,
@@ -74,7 +67,7 @@ def queryHandler(update: Update, context: CallbackContext):
         if __debug__:  # TODO read debug from .env
             logging.info("attend_callback")
             # context.bot.send_message(
-            #     chat_id=DEBUG_CHAT_ID,
+            #     chat_id=ADMIN_CHAT_ID,
             #     text=f'attend_callback for item_id: {item_id}'
             # )
         attend_callback(

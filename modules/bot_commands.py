@@ -9,13 +9,10 @@ from telegram import (
 from telegram.ext import CallbackContext
 import requests
 from modules.post_upload_conversation import send_post_to_channel
-from settings.env import DEBUG_CHAT_ID
-from settings.env import MAIN_CHANNEL_ID
-
-import os
+from settings.env import MAIN_CHANNEL_ID, PORT, API_ENDPOINT
 
 randomPImageUrl = "https://picsum.photos/1200"
-ENDPOINT = os.getenv("ENDPOINT")
+
 
 
 def startCommand(update: Update, context: CallbackContext):
@@ -37,9 +34,9 @@ def get_docs(update: Update, context: CallbackContext):
     host_ip = requests.get("https://api.ipify.org").content.decode("utf8")
     text = f"""
     Current host location: {host_ip}
-    
+
     Link to docs page:
-    http://{host_ip}:8001/docs
+    http://{host_ip}:{PORT}/docs
     """
 
     context.bot.send_message(
@@ -89,7 +86,7 @@ def post_from_id(update: Update, context: CallbackContext):
     }
 
     r = requests.get(
-        url=f"http://{ENDPOINT}:8001/auc_ext/item_by_id/",
+        url=f"{API_ENDPOINT}/auc_ext/item_by_id/",
         headers=headers,
         params=params,
     )

@@ -4,17 +4,6 @@
 import requests
 import json
 
-# load .env variables
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-PWD = os.getenv("PWD")
-
-import sys
-
-sys.path.insert(1, PWD)
-
 from db_api import schemas
 
 
@@ -22,7 +11,7 @@ from db_api import schemas
 def create_item(item: schemas.AuctionUserCreate, endpoint: str) -> int:
 
     r = requests.post(
-        url=f"http://{endpoint}:8001/auc_ext/create_item/",
+        url=f"{endpoint}/auc_ext/create_item/",
         data=json.dumps(item.dict(), default=str),
     )
 
@@ -32,7 +21,7 @@ def create_item(item: schemas.AuctionUserCreate, endpoint: str) -> int:
 def read_item_by_id(id: int, endpoint: str) -> dict:
 
     r = requests.get(
-        url=f"http://{endpoint}:8001/auc_ext/item_by_id/",
+        url=f"{endpoint}/auc_ext/item_by_id/",
         params=dict(id=id),
     )
 
@@ -58,7 +47,7 @@ def update_item_by_id(
     }
 
     r = requests.put(
-        url=f"http://{endpoint}:8001/auc_ext/update_item_by_id/",
+        url=f"{endpoint}/auc_ext/update_item_by_id/",
         headers=headers,
         params=params,
         data=json.dumps(new_item.dict(), default=str),
@@ -93,7 +82,7 @@ def reassign_item(
     }
 
     r = requests.put(
-        url=f"http://{endpoint}:8001/auc_ext/update_item_by_id/",
+        url=f"{endpoint}/auc_ext/update_item_by_id/",
         headers=headers,
         params=params,
         data=json.dumps(new_item.dict(), default=str),
@@ -115,7 +104,7 @@ def get_user_by_username(username: str, endpoint: str) -> requests.models.Respon
     }
 
     return requests.get(
-        f"http://{endpoint}:8001/auc_ext/user_by_username/",
+        f"{endpoint}/auc_ext/user_by_username/",
         headers=headers,
         params=params,
     )
@@ -133,7 +122,7 @@ def create_user(username: str, endpoint: str) -> requests.models.Response:
     }
 
     return requests.post(
-        f"http://{endpoint}:8001/auc_ext/create_user/", headers=headers, json=json_data
+        f"{endpoint}/auc_ext/create_user/", headers=headers, json=json_data
     )
 
 

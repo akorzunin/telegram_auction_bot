@@ -11,9 +11,8 @@ import logging
 import requests
 from modules import api_handler
 from utils.dqdict import Dqdict as dqdict
-import os
 
-ENDPOINT = os.getenv("ENDPOINT")
+from settings.env import API_ENDPOINT as ENDPOINT
 
 
 def get_price_callback(update: Update, context: CallbackContext, item_id: int):
@@ -28,11 +27,11 @@ def get_price_callback(update: Update, context: CallbackContext, item_id: int):
     text = f"""
     Info about item: {item_data['title']}
 
-    Description: 
+    Description:
     {item_data['description']}
 
     Price: {item_data['price']}
-    Current owner: {'None' if item_data['owner_id'] == 0 else item_data['owner_id']} 
+    Current owner: {'None' if item_data['owner_id'] == 0 else item_data['owner_id']}
 
     Item currently is {'sold' if item_data['is_sold'] else 'not sold'}
 
@@ -108,7 +107,7 @@ def attend_callback(update: Update, context: CallbackContext, item_id: int):
     Продолжается аукцион
     на лот {item['title']}
     id: {item_id}
-    
+
     Текущая цена {item['price']}
     """
 
@@ -152,7 +151,7 @@ def price_increment_callback(
     Item: {data['title']} id: {data['id']}
     was successfully reassigned to user {username}
     Current price: {data['price']}
-    
+
     """
     context.bot.send_message(
         chat_id=update.effective_user.id,

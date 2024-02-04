@@ -20,18 +20,15 @@ from telegram.ext import (
 from modules.err_handler import error_handler
 from modules.bot_handlers import queryHandler
 
-# load .env variables
-import os
-from dotenv import load_dotenv
+from settings.env import TOKEN, DEBUG
 
-load_dotenv()
-# read TOKEN from .env
-TOKEN = os.getenv("TOKEN")
-updater = Updater(token=TOKEN)
 
 import logging
 
-DEBUG = __debug__
+if not TOKEN:
+    raise Exception("Cant find bot token in env variables try to to specify it in .env file")
+updater = Updater(token=TOKEN)
+
 LOG_FILE_NAME = "auction_bot.log"
 format = "%(asctime)s [%(levelname)s]: %(message)s"
 logger = logging.basicConfig(

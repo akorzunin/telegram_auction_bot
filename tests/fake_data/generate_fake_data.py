@@ -1,15 +1,4 @@
 # %%
-# load .env variables
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-PWD = os.getenv("PWD")
-PWD
-
-import sys
-
-sys.path.insert(1, PWD)
 from fake_data_seed import data_link
 from random import randint
 import requests
@@ -17,8 +6,7 @@ from db_api import schemas
 import json
 
 # %%
-ENDPOINT = os.getenv("ENDPOINT")
-ENDPOINT
+from settings.env import API_ENDPOINT as ENDPOINT
 
 # %%
 from random import sample
@@ -37,7 +25,7 @@ def main():
             username=user,
         )
         r = requests.post(
-            f"http://{ENDPOINT}:8001/auc_ext/create_user/", json=json_data.dict()
+            f"{ENDPOINT}/auc_ext/create_user/", json=json_data.dict()
         )
         # display(user, r.status_code)
 
@@ -57,7 +45,7 @@ def main():
             owner_id=0,
         )
         r = requests.post(
-            f"http://{ENDPOINT}:8001/auc_ext/create_item/",
+            f"{ENDPOINT}/auc_ext/create_item/",
             data=json.dumps(json_data.dict(), default=str),
         )
 

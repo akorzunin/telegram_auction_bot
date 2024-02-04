@@ -7,13 +7,11 @@ from typing import Dict
 from telegram import Update, ParseMode
 from telegram.ext import CallbackContext
 
-# from ..settings.debug_members import DEBUG_MEMBER_LIST
-
+from settings.env import ADMIN_CHAT_ID
 # logger = logging.getLogger(__name__)
 
-DEBUG_MEMBER_LIST = [
-    503131177,
-]
+# from ..settings.debug_members import DEBUG_MEMBER_LIST
+DEBUG_MEMBER_LIST = [ADMIN_CHAT_ID] or []
 
 
 def error_handler(update: object, context: CallbackContext) -> None:
@@ -24,7 +22,7 @@ def error_handler(update: object, context: CallbackContext) -> None:
     # traceback.format_exception returns the usual python message about an exception, but as a
     # list of strings rather than a single string, so we have to join them together.
     tb_list = traceback.format_exception(
-        None, context.error, context.error.__traceback__
+        None, context.error, context.error.__traceback__, limit=500
     )
     tb_string = "".join(tb_list)
 
