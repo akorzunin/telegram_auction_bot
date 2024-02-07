@@ -6,7 +6,7 @@ from telegram import (
 )
 from telegram.ext import CallbackContext
 
-from modules.bot_callbacks import (
+from src.bot.bot_callbacks import (
     attend_callback,
     get_price_callback,
     price_increment_callback,

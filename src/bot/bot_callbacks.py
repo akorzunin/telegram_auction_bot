@@ -5,9 +5,9 @@ from telegram import (
 )
 from telegram.ext import CallbackContext
 
-from modules import api_handler
-from settings.env import API_ENDPOINT as ENDPOINT
-from utils.dqdict import Dqdict as dqdict
+from src.bot import api_handler
+from src.common.settings.env import API_ENDPOINT as ENDPOINT
+from src.common.utils.dqdict import Dqdict as dqdict
 
 
 def get_price_callback(update: Update, context: CallbackContext, item_id: int):

@@ -1,21 +1,12 @@
 from datetime import datetime
-from typing import Optional, Union
+from typing import Optional
 
 from dateutil.relativedelta import relativedelta
 from pydantic import BaseModel
-from sqlalchemy.orm.attributes import InstrumentedAttribute
-from sqlalchemy.sql.elements import BinaryExpression
-
-# import models
-# try:
-#     import models
-# except ModuleNotFoundError:
-#    import db_api.models as models # TODO fix it
 
 
 class AuctionItemBase(BaseModel):
     title: str
-    # не обяхателоное для заполнения поле
     description: Optional[str] = None
     price: float
     is_start_price: bool
@@ -39,23 +30,6 @@ class AuctionItemRead(AuctionItemBase):
     end_date: datetime
 
     class Config:
-        orm_mode = True
-
-
-class AuctionItemUpdate(BaseModel):
-    """Update item in database from API data"""
-
-    title: Optional[Union[str, InstrumentedAttribute]]
-    description: Optional[Union[str, InstrumentedAttribute]]
-    price: Optional[Union[float, InstrumentedAttribute, BinaryExpression]]
-    is_start_price: Optional[Union[bool, InstrumentedAttribute]] = False
-    owner_id: Optional[Union[float, InstrumentedAttribute]]
-    is_sold: Optional[Union[bool, InstrumentedAttribute]] = False
-    end_date: Optional[Union[datetime, InstrumentedAttribute]]
-
-    class Config:
-        require_by_default = False  # use Required[]
-        arbitrary_types_allowed = True
         orm_mode = True
 
 

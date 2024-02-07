@@ -5,8 +5,9 @@ from typing import Optional, Sequence
 
 import requests
 
-from db_api import schemas
-from settings.env import API_ENDPOINT
+from src.api import schemas
+from src.api.models import AuctionItemUpdate
+from src.common.settings.env import API_ENDPOINT
 
 
 def api_call(
@@ -47,7 +48,7 @@ def read_item_by_id(id: int, endpoint: str) -> dict:
 
 
 def update_item_by_id(
-    new_item: schemas.AuctionItemUpdate,
+    new_item: AuctionItemUpdate,
     endpoint: str,
     item_id: int,
     price_increment: int = None,
@@ -67,7 +68,7 @@ def update_item_by_id(
         path="/auc_ext/update_item_by_id",
         params=params,
         headers=headers,
-        data=json.dumps(item.dict(), default=str),
+        data=json.dumps(new_item.dict(), default=str),
     )
     return r.json()
 

@@ -6,11 +6,11 @@ from telegram.ext import (
     Updater,
 )
 
-from modules import bot_commands, bot_handlers
-from modules.conversation_handlers import conv_handler
-from modules.err_handler import error_handler
-from modules.post_upload_conversation import post_upload_conversation
-from settings.env import DEBUG, TOKEN
+from src.bot import bot_commands, bot_handlers
+from src.bot.conversation_handlers import conv_handler
+from src.bot.err_handler import error_handler
+from src.bot.post_upload_conversation import post_upload_conversation
+from src.common.settings.env import DEBUG, TOKEN
 
 if not TOKEN:
     raise Exception(

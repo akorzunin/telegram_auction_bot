@@ -5,8 +5,8 @@ from telegram import (
 )
 from telegram.ext import CallbackContext
 
-from modules.post_upload_conversation import send_post_to_channel
-from settings.env import API_ENDPOINT, MAIN_CHANNEL_ID, PORT
+from src.bot.post_upload_conversation import send_post_to_channel
+from src.common.settings.env import API_ENDPOINT, MAIN_CHANNEL_ID, PORT
 
 randomPImageUrl = "https://picsum.photos/1200"
 

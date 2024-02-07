@@ -1,10 +1,6 @@
 from sqlalchemy.orm import Session
 
-try:
-    import models
-    import schemas
-except ModuleNotFoundError:
-    import db_api.schemas as schemas  # TODO fix it
+from src.api import models, schemas
 
 # read more in figma file
 # https://www.figma.com/file/7Rmtk9aiGvOyfKEPJMqfxG/bot-alg?node-id=69%3A1826
@@ -32,7 +28,7 @@ def auc_item_read(db: Session, skip: int = 0, limit: int = 100):
 # update item by id
 def update_item_by_id(
     db: Session,
-    item: schemas.AuctionItemUpdate,
+    item: models.AuctionItemUpdate,
     item_id: int,
     price_increment: float = None,
 ):
@@ -73,7 +69,7 @@ def update_item_by_id(
 
 # update item by title
 def update_item_by_title(
-    db: Session, item: schemas.AuctionItemUpdate, price_increment: float = None
+    db: Session, item: models.AuctionItemUpdate, price_increment: float = None
 ):
 
     # remove all None values from recived item
@@ -96,7 +92,7 @@ def update_item_by_title(
         .filter_by(title=item.title)
         .update(
             # validate data
-            schemas.AuctionItemUpdate(
+            models.AuctionItemUpdate(
                 **dict(
                     # merge 2 dicts w/ default data and updated data
                     defalut_dict,

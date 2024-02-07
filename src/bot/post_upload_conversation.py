@@ -19,6 +19,8 @@ from telegram.ext import (
     MessageHandler,
 )
 
+from src.common.settings.env import MAIN_CHANNEL_ID as POST_CHANNEL_ID
+
 (
     TEXT_CHOISE,
     TYPING_REPLY,
@@ -28,8 +30,6 @@ from telegram.ext import (
     ENTER_DESCRIPTION,
     ENTER_PRICE,
 ) = range(21 - 15 + 1)
-POST_CHANNEL_ID = 503131177  # my direct message
-# POST_CHANNEL_ID = -1001663892384 # actual channel id
 
 reply_keyboard = [
     ["Add photo", "Add title"],

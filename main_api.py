@@ -1,17 +1,11 @@
-import crud
-import models
-import schemas
 import uvicorn
-from database import SessionLocal, engine
 from fastapi import Depends, FastAPI
 from sqlalchemy.orm import Session
 
-try:
-    models.Base.metadata.create_all(bind=engine)
-except Exception as e:
-    print(e)
-    print("pepe")
-    raise e
+from src.api import crud, models, schemas
+from src.api.database import SessionLocal, engine
+
+models.Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI()

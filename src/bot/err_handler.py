@@ -6,7 +6,7 @@ import traceback
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
 
-from settings.env import ADMIN_CHAT_ID
+from src.common.settings.env import ADMIN_CHAT_ID
 
 # logger = logging.getLogger(__name__)
 

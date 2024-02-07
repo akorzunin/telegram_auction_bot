@@ -5,14 +5,14 @@ services:
     image: telegramauctionbot
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./src/bot/Dockerfile
     env_file:
       - .env
   telegrambotapi:
     image: telegrambotapi
     build:
-      context: ./db_api
-      dockerfile: ./Dockerfile_api
+      context: .
+      dockerfile: ./src/api/Dockerfile
     env_file:
       - .env
     volumes:

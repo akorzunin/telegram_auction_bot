@@ -1,3 +1,0 @@
-DEBUG_MEMBER_LIST = [
-    503131177,
-]
